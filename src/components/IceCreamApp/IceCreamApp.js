@@ -9,7 +9,6 @@ class IceCreamApp extends Component {
       value: "",
     }
 
-    this.updateFlavors = this.updateFlavors.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -18,17 +17,12 @@ class IceCreamApp extends Component {
     console.log(this.props);
   }
 
-  updateFlavors(flavor) {
-    this.setState({ flavors: [...this.state.flavors, flavor]}); 
-  }
-
   handleChange(event) {
     this.setState({value: event.target.value});
   }
 
   handleSubmit(event) {
-    const { addFlavorToList } = this.props;
-    addFlavorToList(this.state.value);
+    this.props.addFlavorToList(this.state.value);
     this.setState({value: ""});
     event.preventDefault();
   }

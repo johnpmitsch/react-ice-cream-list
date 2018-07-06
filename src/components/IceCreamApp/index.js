@@ -1,6 +1,5 @@
 import IceCreamApp from './IceCreamApp';
 import { connect } from 'react-redux';
-import { addFlavorToList } from '../../redux/actions/FlavorListActions';
 
 // mapping the global state to the IceCreamApp component's props
 const mapStateToProps = state => (state.flavors);
