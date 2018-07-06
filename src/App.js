@@ -1,54 +1,24 @@
 import React, { Component } from 'react';
-import IceCreamList from './components/iceCreamList';
+import { Provider } from 'react-redux';
+import { createStore, combineReducers } from 'redux';
+import flavors from './redux/reducers/FlavorListReducers.js';
+import IceCreamApp from './components/IceCreamApp';
 import './App.css';
 
-const myFlavors = ["mint chocolate chip", "rocky road", "cherry garcia"];
+// combining our reducers to pass into the store
+const rootReducer = combineReducers({
+  flavors
+});
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      myFlavors: myFlavors,
-      value: "",
-    }
-
-    this.updateFlavors = this.updateFlavors.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  updateFlavors(flavor) {
-    this.setState({ myFlavors: [...this.state.myFlavors, flavor]}); 
-  }
-
-  handleChange(event) {
-    this.setState({value: event.target.value});
-  }
-
-  handleSubmit(event) {
-    this.updateFlavors(this.state.value);
-    this.setState({value: ""});
-    event.preventDefault();
-  }
-
   render() {
+    // the provider makes the store (created below) avaiable to all child components within
+    // it. We then can use the store to map global state to props.
     return (
-      <div className="App">
-        <h1>My favorite ice cream flavors</h1>
-
-        <IceCreamList 
-          flavors={this.state.myFlavors} />
-
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Add Flavor:
-            <input type="text" value={this.state.value} onChange={this.handleChange} />
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
-      </div>
-    );
+      <Provider store={createStore(rootReducer)}>
+        <IceCreamApp />
+      </Provider>
+    )
   }
 }
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class IceCreamList extends Component {
+class FlavorList extends Component {
   render() { 
     const { flavors } = this.props;
 
@@ -13,4 +13,4 @@ class IceCreamList extends Component {
     ); 
   } 
 }
-export default IceCreamList;
+export default FlavorList;
